@@ -205,9 +205,16 @@ class TasksModule {
 
     /**
      * Mark task as complete
+     * Requires POST method to prevent CSRF attacks
      */
     private function completeTask() {
-        $id = $_GET['id'] ?? null;
+        // Require POST method for security
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: ?module=tasks&action=list');
+            exit;
+        }
+        
+        $id = $_POST['id'] ?? null;
         if ($id) {
             $this->db->update(
                 'tasks',

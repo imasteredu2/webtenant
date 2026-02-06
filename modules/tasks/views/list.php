@@ -91,7 +91,10 @@
                                     </td>
                                     <td style="padding:12px;">
                                         <?php if ($task['status'] !== 'done'): ?>
-                                            <a href="?module=tasks&action=complete&id=<?php echo $task['id']; ?>" style="color:#28a745;margin-right:10px;">✓ Complete</a>
+                                            <form method="POST" action="?module=tasks&action=complete" style="display:inline;">
+                                                <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
+                                                <button type="submit" style="background:none;border:none;color:#28a745;cursor:pointer;padding:0;text-decoration:underline;margin-right:10px;">✓ Complete</button>
+                                            </form>
                                         <?php endif; ?>
                                         <a href="?module=tasks&action=edit&id=<?php echo $task['id']; ?>" style="color:#007bff;margin-right:10px;">Edit</a>
                                         <form method="POST" action="?module=tasks&action=delete" style="display:inline;">
