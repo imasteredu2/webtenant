@@ -163,10 +163,17 @@ class ContactsModule {
 
     /**
      * Delete a contact
+     * Requires POST method to prevent CSRF attacks
      */
     private function deleteContact() {
-        $id = $_GET['id'] ?? null;
-        if ($id && $_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Require POST method for security
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: ?module=contacts&action=list');
+            exit;
+        }
+        
+        $id = $_POST['id'] ?? null;
+        if ($id) {
             $this->db->delete('contacts', 'id = :id', ['id' => $id]);
         }
         header('Location: ?module=contacts&action=list');

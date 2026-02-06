@@ -186,10 +186,17 @@ class TasksModule {
 
     /**
      * Delete a task
+     * Requires POST method to prevent CSRF attacks
      */
     private function deleteTask() {
-        $id = $_GET['id'] ?? null;
-        if ($id && $_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Require POST method for security
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: ?module=tasks&action=list');
+            exit;
+        }
+        
+        $id = $_POST['id'] ?? null;
+        if ($id) {
             $this->db->delete('tasks', 'id = :id', ['id' => $id]);
         }
         header('Location: ?module=tasks&action=list');

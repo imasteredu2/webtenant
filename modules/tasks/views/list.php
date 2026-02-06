@@ -94,9 +94,11 @@
                                             <a href="?module=tasks&action=complete&id=<?php echo $task['id']; ?>" style="color:#28a745;margin-right:10px;">✓ Complete</a>
                                         <?php endif; ?>
                                         <a href="?module=tasks&action=edit&id=<?php echo $task['id']; ?>" style="color:#007bff;margin-right:10px;">Edit</a>
-                                        <a href="?module=tasks&action=delete&id=<?php echo $task['id']; ?>" 
-                                           onclick="return confirm('Are you sure you want to delete this task?');" 
-                                           style="color:#dc3545;">Delete</a>
+                                        <form method="POST" action="?module=tasks&action=delete" style="display:inline;">
+                                            <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
+                                            <button type="submit" onclick="return confirm('Are you sure you want to delete this task?');" 
+                                                    style="background:none;border:none;color:#dc3545;cursor:pointer;padding:0;text-decoration:underline;">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

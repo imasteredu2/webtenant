@@ -99,13 +99,26 @@ class Router {
 
     /**
      * Handle login
+     * TODO: Implement proper authentication with user management module
+     * SECURITY WARNING: This is a basic demo authentication for testing only
      */
     private function handleLogin() {
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
 
-        // Simple authentication - should be enhanced with proper user management module
-        // For now, just set session
+        // Basic validation
+        if (empty($email) || empty($password)) {
+            header('Location: ?action=login&error=1');
+            exit;
+        }
+
+        // TODO: Replace with proper database authentication
+        // For demo purposes only - accepts any credentials
+        // In production, implement proper password verification:
+        // 1. Query users table for email and tenant
+        // 2. Verify password with password_verify()
+        // 3. Check user is active
+        // 4. Set proper session variables
         $_SESSION['user_id'] = 1;
         $_SESSION['user_email'] = $email;
         $_SESSION['authenticated'] = true;

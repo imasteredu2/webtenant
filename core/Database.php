@@ -96,6 +96,12 @@ class Database {
      * Update data with tenant isolation
      */
     public function update($table, $data, $where, $whereParams = []) {
+        // Check for parameter name collisions to prevent overwriting
+        $collisions = array_intersect_key($data, $whereParams);
+        if (!empty($collisions)) {
+            throw new Exception("Parameter name collision in update: " . implode(', ', array_keys($collisions)));
+        }
+        
         $setParts = [];
         foreach ($data as $key => $value) {
             $setParts[] = "{$key} = :{$key}";
@@ -104,8 +110,8 @@ class Database {
 
         // Add tenant isolation to WHERE clause
         if (TENANT_ISOLATION && $this->currentTenantId) {
-            $where .= " AND tenant_id = :tenant_id";
-            $whereParams['tenant_id'] = $this->currentTenantId;
+            $where .= " AND tenant_id = :tenant_id_where";
+            $whereParams['tenant_id_where'] = $this->currentTenantId;
         }
 
         $sql = "UPDATE {$table} SET {$setClause} WHERE {$where}";
