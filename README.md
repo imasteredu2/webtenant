@@ -21,6 +21,7 @@ A PHP-based, modular, tenant-isolated web application framework that allows you 
 
 ### Included Modules
 
+- **Authentication Module**: Secure user management with password hashing, login attempt tracking, and session management
 - **Contacts/CRM Module**: Manage contacts, companies, and customer relationships
 - **Task Management Module**: Track tasks, to-dos, priorities, and deadlines
 
@@ -242,8 +243,10 @@ https://github.com/imasteredu2/webtenant
 
 ## Roadmap
 
-- [ ] Authentication module with proper user management
+- [x] Authentication module with proper user management
+- [x] CSRF token protection
 - [ ] Role-based access control (RBAC)
+- [ ] Password reset functionality
 - [ ] Module marketplace/registry
 - [ ] API endpoints for modules
 - [ ] Module installer wizard
