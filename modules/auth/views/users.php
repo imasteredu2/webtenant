@@ -80,6 +80,7 @@
                                         <a href="?module=auth&action=edit_user&id=<?php echo $user['id']; ?>" style="color:#007bff;margin-right:10px;">Edit</a>
                                         <?php if ($user['id'] != $_SESSION['user_id']): ?>
                                             <form method="POST" action="?module=auth&action=delete_user" style="display:inline;">
+                                                <?php echo CSRF::getInputField(); ?>
                                                 <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                                                 <button type="submit" onclick="return confirm('Delete this user?');" 
                                                         style="background:none;border:none;color:#dc3545;cursor:pointer;padding:0;text-decoration:underline;">Delete</button>

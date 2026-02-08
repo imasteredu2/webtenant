@@ -114,6 +114,7 @@ class TasksModule {
      */
     private function addTask() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            CSRF::validateOrDie();
             $data = [
                 'title' => $_POST['title'],
                 'description' => $_POST['description'] ?? null,
@@ -157,6 +158,7 @@ class TasksModule {
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            CSRF::validateOrDie();
             $data = [
                 'title' => $_POST['title'],
                 'description' => $_POST['description'] ?? null,
@@ -195,6 +197,8 @@ class TasksModule {
             exit;
         }
         
+        CSRF::validateOrDie();
+        
         $id = $_POST['id'] ?? null;
         if ($id) {
             $this->db->delete('tasks', 'id = :id', ['id' => $id]);
@@ -213,6 +217,8 @@ class TasksModule {
             header('Location: ?module=tasks&action=list');
             exit;
         }
+        
+        CSRF::validateOrDie();
         
         $id = $_POST['id'] ?? null;
         if ($id) {

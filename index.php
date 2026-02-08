@@ -12,6 +12,7 @@ require_once 'core/Database.php';
 require_once 'core/Tenant.php';
 require_once 'core/Module.php';
 require_once 'core/Router.php';
+require_once 'core/CSRF.php';
 
 // Initialize application
 $db = new Database();

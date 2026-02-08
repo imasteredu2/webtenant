@@ -35,6 +35,7 @@
 
             <div class="module-card">
                 <form method="POST">
+                    <?php echo CSRF::getInputField(); ?>
                     <div class="form-group">
                         <label for="first_name">First Name *</label>
                         <input type="text" id="first_name" name="first_name" 

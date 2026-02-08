@@ -19,6 +19,7 @@
             <?php endif; ?>
 
             <form method="POST" action="?module=auth&action=register">
+                <?php echo CSRF::getInputField(); ?>
                 <div class="form-group">
                     <label for="name">Full Name *</label>
                     <input type="text" id="name" name="name" required value="<?php echo htmlspecialchars($_POST['name'] ?? ''); ?>">

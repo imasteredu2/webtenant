@@ -49,6 +49,7 @@
                 <div class="module-card">
                     <h3>Profile Information</h3>
                     <form method="POST">
+                        <?php echo CSRF::getInputField(); ?>
                         <div class="form-group">
                             <label for="name">Full Name</label>
                             <input type="text" id="name" name="name" required

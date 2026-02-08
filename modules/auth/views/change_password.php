@@ -35,6 +35,7 @@
 
             <div class="module-card" style="max-width:500px;">
                 <form method="POST">
+                    <?php echo CSRF::getInputField(); ?>
                     <div class="form-group">
                         <label for="current_password">Current Password</label>
                         <input type="password" id="current_password" name="current_password" required>

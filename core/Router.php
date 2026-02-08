@@ -101,6 +101,12 @@ class Router {
      * Handle login with proper authentication
      */
     private function handleLogin() {
+        // Validate CSRF token
+        if (!CSRF::validate()) {
+            header('Location: ?action=login&error=' . urlencode('Security validation failed. Please try again.'));
+            exit;
+        }
+
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
 
@@ -123,8 +129,9 @@ class Router {
                 $_SESSION['user_role'] = $user['role'];
                 $_SESSION['authenticated'] = true;
 
-                // Regenerate session ID for security
+                // Regenerate session ID and CSRF token for security
                 session_regenerate_id(true);
+                CSRF::regenerateToken();
 
                 header('Location: ?action=dashboard');
                 exit;

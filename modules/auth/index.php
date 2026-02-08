@@ -221,6 +221,7 @@ class AuthModule {
      */
     private function addUser() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            CSRF::validateOrDie();
             $name = trim($_POST['name'] ?? '');
             $email = trim($_POST['email'] ?? '');
             $password = $_POST['password'] ?? '';
@@ -284,6 +285,7 @@ class AuthModule {
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            CSRF::validateOrDie();
             $name = trim($_POST['name'] ?? '');
             $email = trim($_POST['email'] ?? '');
             $role = $_POST['role'] ?? 'user';
@@ -329,6 +331,8 @@ class AuthModule {
             header('Location: ?module=auth&action=users');
             exit;
         }
+        
+        CSRF::validateOrDie();
 
         $id = $_POST['id'] ?? null;
         if ($id) {
@@ -358,6 +362,7 @@ class AuthModule {
         );
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            CSRF::validateOrDie();
             $name = trim($_POST['name'] ?? '');
             $email = trim($_POST['email'] ?? '');
 
@@ -393,6 +398,7 @@ class AuthModule {
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            CSRF::validateOrDie();
             $currentPassword = $_POST['current_password'] ?? '';
             $newPassword = $_POST['new_password'] ?? '';
             $confirmPassword = $_POST['confirm_password'] ?? '';
@@ -445,6 +451,7 @@ class AuthModule {
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            CSRF::validateOrDie();
             $name = trim($_POST['name'] ?? '');
             $email = trim($_POST['email'] ?? '');
             $password = $_POST['password'] ?? '';

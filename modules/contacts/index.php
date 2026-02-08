@@ -92,6 +92,7 @@ class ContactsModule {
      */
     private function addContact() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            CSRF::validateOrDie();
             $data = [
                 'first_name' => $_POST['first_name'],
                 'last_name' => $_POST['last_name'],
@@ -137,6 +138,7 @@ class ContactsModule {
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            CSRF::validateOrDie();
             $data = [
                 'first_name' => $_POST['first_name'],
                 'last_name' => $_POST['last_name'],
@@ -171,6 +173,8 @@ class ContactsModule {
             header('Location: ?module=contacts&action=list');
             exit;
         }
+        
+        CSRF::validateOrDie();
         
         $id = $_POST['id'] ?? null;
         if ($id) {
