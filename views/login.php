@@ -14,7 +14,22 @@
             
             <?php if (isset($_GET['error'])): ?>
                 <div class="error-message">
-                    Invalid credentials. Please try again.
+                    <?php 
+                    $errorMsg = $_GET['error'];
+                    if ($errorMsg === 'empty') {
+                        echo 'Please enter both email and password.';
+                    } elseif ($errorMsg === 'no_tenant') {
+                        echo 'No tenant found. Please check your URL.';
+                    } else {
+                        echo htmlspecialchars(urldecode($errorMsg));
+                    }
+                    ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (isset($_GET['registered'])): ?>
+                <div style="background:#d4edda;color:#155724;padding:12px;border-radius:6px;margin-bottom:20px;">
+                    Registration successful! Please log in.
                 </div>
             <?php endif; ?>
 
@@ -31,6 +46,10 @@
 
                 <button type="submit" class="btn-primary">Login</button>
             </form>
+
+            <div style="text-align:center;margin-top:15px;">
+                <a href="?module=auth&action=register" style="color:#007bff;">Don't have an account? Register</a>
+            </div>
 
             <div class="login-footer">
                 <p>Tenant-based modular application</p>

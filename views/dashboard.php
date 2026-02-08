@@ -11,6 +11,9 @@
         <header>
             <h1><?php echo APP_NAME; ?> - Dashboard</h1>
             <div class="tenant-info">
+                <?php if (isset($_SESSION['user_name'])): ?>
+                    User: <strong><?php echo htmlspecialchars($_SESSION['user_name']); ?></strong> |
+                <?php endif; ?>
                 Tenant: <strong><?php echo htmlspecialchars($tenant['name'] ?? 'N/A'); ?></strong>
                 <a href="?action=logout" class="btn-logout">Logout</a>
             </div>
@@ -31,8 +34,13 @@
 
         <main>
             <div class="welcome">
-                <h2>Welcome to Your Dashboard</h2>
+                <h2>Welcome<?php if (isset($_SESSION['user_name'])): ?>, <?php echo htmlspecialchars($_SESSION['user_name']); ?><?php endif; ?>!</h2>
                 <p>This is a modular, tenant-based web application.</p>
+                <?php if (isset($_GET['registered'])): ?>
+                    <div style="background:#d4edda;color:#155724;padding:12px;border-radius:6px;margin-top:10px;">
+                        Welcome! Your account has been created successfully.
+                    </div>
+                <?php endif; ?>
             </div>
 
             <div class="modules-grid">
@@ -63,9 +71,9 @@
                 <div class="module-card">
                     <h3>Quick Actions</h3>
                     <ul class="action-list">
-                        <li><a href="?action=modules">Manage Modules</a></li>
-                        <li><a href="?action=settings">Settings</a></li>
-                        <li><a href="?action=users">Manage Users</a></li>
+                        <li><a href="?module=auth&action=profile">My Profile</a></li>
+                        <li><a href="?module=auth&action=users">Manage Users</a></li>
+                        <li><a href="?module=auth&action=change_password">Change Password</a></li>
                     </ul>
                 </div>
             </div>

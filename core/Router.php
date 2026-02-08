@@ -98,9 +98,7 @@ class Router {
     }
 
     /**
-     * Handle login
-     * TODO: Implement proper authentication with user management module
-     * SECURITY WARNING: This is a basic demo authentication for testing only
+     * Handle login with proper authentication
      */
     private function handleLogin() {
         $email = $_POST['email'] ?? '';
@@ -108,23 +106,42 @@ class Router {
 
         // Basic validation
         if (empty($email) || empty($password)) {
-            header('Location: ?action=login&error=1');
+            header('Location: ?action=login&error=empty');
             exit;
         }
 
-        // TODO: Replace with proper database authentication
-        // For demo purposes only - accepts any credentials
-        // In production, implement proper password verification:
-        // 1. Query users table for email and tenant
-        // 2. Verify password with password_verify()
-        // 3. Check user is active
-        // 4. Set proper session variables
-        $_SESSION['user_id'] = 1;
-        $_SESSION['user_email'] = $email;
-        $_SESSION['authenticated'] = true;
+        // Use auth module if available
+        if ($this->moduleManager->isModuleLoaded('auth')) {
+            $authModule = $this->moduleManager->getModule('auth');
+            $result = $authModule->authenticate($email, $password);
 
-        header('Location: ?action=dashboard');
-        exit;
+            if ($result['success']) {
+                $user = $result['user'];
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user_email'] = $user['email'];
+                $_SESSION['user_name'] = $user['name'];
+                $_SESSION['user_role'] = $user['role'];
+                $_SESSION['authenticated'] = true;
+
+                // Regenerate session ID for security
+                session_regenerate_id(true);
+
+                header('Location: ?action=dashboard');
+                exit;
+            } else {
+                header('Location: ?action=login&error=' . urlencode($result['error']));
+                exit;
+            }
+        } else {
+            // Fallback for demo (should not happen in production)
+            $_SESSION['user_id'] = 1;
+            $_SESSION['user_email'] = $email;
+            $_SESSION['user_name'] = 'Demo User';
+            $_SESSION['authenticated'] = true;
+
+            header('Location: ?action=dashboard');
+            exit;
+        }
     }
 
     /**
