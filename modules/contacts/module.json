@@ -1,0 +1,10 @@
+{
+    "name": "Contacts/CRM Module",
+    "version": "1.0.0",
+    "description": "Contact and customer relationship management module for managing contacts, companies, and interactions.",
+    "main": "index.php",
+    "dependencies": [],
+    "provides": ["contacts", "companies", "interactions"],
+    "author": "WebTenant",
+    "category": "business"
+}

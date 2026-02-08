@@ -1,0 +1,10 @@
+{
+    "name": "Task Management Module",
+    "version": "1.0.0",
+    "description": "Task and project management module for tracking tasks, deadlines, and completion status.",
+    "main": "index.php",
+    "dependencies": [],
+    "provides": ["tasks", "todos", "projects"],
+    "author": "WebTenant",
+    "category": "productivity"
+}

@@ -1,0 +1,52 @@
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# PHP
+composer.phar
+/vendor/
+composer.lock
+
+# Logs
+*.log
+logs/
+error_log
+
+# Temporary files
+/tmp/
+*.tmp
+*.temp
+
+# Cache
+cache/
+*.cache
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# User uploaded files (if you add file uploads)
+uploads/
+files/
+
+# Node modules (if you add any frontend build tools)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build artifacts
+dist/
+build/

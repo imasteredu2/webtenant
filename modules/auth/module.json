@@ -1,0 +1,10 @@
+{
+    "name": "Authentication Module",
+    "version": "1.0.0",
+    "description": "User authentication and management module with secure password handling and session management",
+    "main": "index.php",
+    "dependencies": [],
+    "provides": ["authentication", "user_management", "password_reset"],
+    "author": "WebTenant",
+    "category": "security"
+}
